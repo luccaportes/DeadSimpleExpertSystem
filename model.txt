@@ -1,0 +1,24 @@
+{"RULES":{ 
+	"R1": {
+		"CONDS":[
+			"COND_1",
+			"COND_2",
+			"COND_3"
+		],
+		"CONSEQ":[
+			"CONSEQ_1",
+			"CONSEQ_2",
+			"CONSEQ_3"
+		]
+	}
+
+}
+
+
+{ "STATEMENTS": [
+	"ST_1",
+	"ST_2",
+	"ST_3"
+	]
+
+}

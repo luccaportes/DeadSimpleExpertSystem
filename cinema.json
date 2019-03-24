@@ -1,0 +1,74 @@
+@RULES
+{"RULES":{ 
+	"R1": {
+		"CONDS":[
+			"LONGE"
+			],
+		"CONSEQ":[
+			"CARRO"
+			]
+	},
+	"R2": {
+		"CONDS":[
+			"PERTO",
+			"RAPIDO"
+			],
+		"CONSEQ":[
+			"A_PE"
+			]
+	},
+	"R3": {
+		"CONDS":[
+			"PERTO",
+			"DEVAGAR"
+			],
+		"CONSEQ":[
+			"CARRO"
+			]
+	},
+	"R4": {
+		"CONDS":[
+			"CARRO",
+			"CENTRO"
+			],
+		"CONSEQ":[
+			"TAXI"
+			]
+	},
+	"R5": {
+		"CONDS":[
+			"CARRO",
+			"~CENTRO"
+			],
+		"CONSEQ":[
+			"PARTICULAR"
+			]
+	},
+	"R6": {
+		"CONDS":[
+			"A_PE",
+			"CHUVA"
+			],
+		"CONSEQ":[
+			"IMPERMEAVEL"
+			]
+	},
+	"R7": {
+		"CONDS":[
+			"A_PE",
+			"SOL"
+			],
+		"CONSEQ":[
+			"PASSEIO"
+			]
+	}
+	}
+}
+
+@STATEMENTS
+{ "STATEMENTS": [
+	"LONGE",
+	"~CENTRO"
+	]
+
+}

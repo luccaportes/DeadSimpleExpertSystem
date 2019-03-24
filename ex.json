@@ -1,0 +1,38 @@
+@RULES
+{"RULES":{ 
+	"R1": {
+		"CONDS":[
+			"MALE"
+			],
+		"CONSEQ":[
+			"MR"
+			]
+	},
+	"R2": {
+		"CONDS":[
+			"FEMALE",
+			"MARRIED"
+			],
+		"CONSEQ":[
+			"MRS",
+			"~MISS"
+			]
+	},
+	"R3": {
+		"CONDS":[
+			"FEMALE"
+			],
+		"CONSEQ":[
+			"MISS"
+			]
+		}	
+
+	}
+}
+
+@STATEMENTS
+{ "STATEMENTS": [
+	"FEMALE",
+	"MARRIED"
+	]
+}
