@@ -4,7 +4,7 @@
 		"CONDS":[
 			"LONGE"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"CARRO"
 			]
 	},
@@ -13,7 +13,7 @@
 			"PERTO",
 			"RAPIDO"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"A_PE"
 			]
 	},
@@ -22,7 +22,7 @@
 			"PERTO",
 			"DEVAGAR"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"CARRO"
 			]
 	},
@@ -31,7 +31,7 @@
 			"CARRO",
 			"CENTRO"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"TAXI"
 			]
 	},
@@ -40,7 +40,7 @@
 			"CARRO",
 			"~CENTRO"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"PARTICULAR"
 			]
 	},
@@ -49,7 +49,7 @@
 			"A_PE",
 			"CHUVA"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"IMPERMEAVEL"
 			]
 	},
@@ -58,7 +58,7 @@
 			"A_PE",
 			"SOL"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"PASSEIO"
 			]
 	}
@@ -68,7 +68,6 @@
 @STATEMENTS
 { "STATEMENTS": [
 	"LONGE",
-	"~CENTRO"
+	"CENTRO"
 	]
-
 }

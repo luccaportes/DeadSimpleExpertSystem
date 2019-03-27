@@ -1,49 +1,54 @@
 import json
 
-def remove_positive(stats):
-	new_stats = set(stats)
-	for stat in stats:
-		if stat[0] == "~":
-			if stat.replace("~", "") in stats:
-				new_stats.remove(stat.replace("~", ""))
-	return new_stats
+class Parser:
+	def __init__(self, path):
+		self.path = path
+		self.content = None
+		self.start_rules, self.end_rules = None, None
+		self.dict_rules = None
+		self.dict_stat = None
 
-def remove_negatives(stats):
-	new_stats = set(stats)
-	for stat in stats:
-		if stat[0] == "~":
-			new_stats.remove(stat)
-	return new_stats
+	def parse(self):
+		self.content = self.load_file()
+		self.start_rules, self.end_rules = self.determine_bounds()
+		self.dict_rules = self.parse_rules()
+		self.dict_stat = self.parse_statements()
 
-with open("ex.json") as parse_file:
-	contents = parse_file.read().upper()
+	def get_dict_rules(self):
+		return self.dict_rules
+	
+	def get_dict_stat(self):
+		return self.dict_stat
+	
+	def load_file(self):
+		with open(self.path) as parse_file:
+			content = parse_file.read().upper()
+		return content
 
-start_rules = contents.find("@RULES") + 6
-end_rules = contents.find("@STATEMENTS")
+	def determine_bounds(self):
+		start_rules = self.content.find("@RULES") + 6
+		if start_rules == -1:
+			raise Exception("No '@RULES' declarated.")
+		end_rules = self.content.find("@STATEMENTS")
+		if end_rules == -1:
+			raise Exception("No '@STATEMENTS' declarated.")
+		return start_rules, end_rules
+	
+	def parse_rules(self):
+		dic_temp = json.loads(self.content[self.start_rules:self.end_rules])
+		if "RULES" not in dic_temp:
+			raise Exception("No 'RULES' key declarated in the RULES JSON.")
+		dic_rules = dict(dic_temp)
+		for k, v in dic_temp["RULES"].items():
+			if "CONDS" not in dic_rules["RULES"][k]:
+				raise Exception("No 'CONDS' key declarated in the RULE " + k + ".")
+			if "CONSEQS" not in dic_rules["RULES"][k]:
+				raise Exception("No 'CONSEQS' key declarated in the RULE " + k + ".")
+			dic_rules["RULES"][k]["CONDS"] = set(dic_rules["RULES"][k]["CONDS"])
+			dic_rules["RULES"][k]["CONSEQS"] = set(dic_rules["RULES"][k]["CONSEQS"])
+		return dic_rules
 
-dic_temp = json.loads(contents[start_rules:end_rules])
-dic_rules = dict(dic_temp)
-for k, v in dic_temp["RULES"].items():
-	dic_rules["RULES"][k]["CONDS"] = set(dic_rules["RULES"][k]["CONDS"])
-	dic_rules["RULES"][k]["CONSEQ"] = set(dic_rules["RULES"][k]["CONSEQ"])
-
-dic_stat = json.loads(contents[end_rules + 11:])
-
-dic_stat["STATEMENTS"] = set(dic_stat["STATEMENTS"])
-stat_backup = set(dic_stat["STATEMENTS"])
-
-while True:
-	stat_size = len(dic_stat["STATEMENTS"])
-	for _,r in sorted(dic_rules["RULES"].items()):
-		if r["CONDS"].issubset(dic_stat["STATEMENTS"]):
-			dic_stat["STATEMENTS"] = dic_stat["STATEMENTS"].union(r["CONSEQ"])
-	dic_stat["STATEMENTS"] = remove_positive(dic_stat["STATEMENTS"])
-
-	if len(dic_stat["STATEMENTS"]) == stat_size:
-		break
-
-resp = dic_stat["STATEMENTS"] - stat_backup
-
-resp = remove_negatives(resp)
-
-print(resp)
+	def parse_statements(self):
+		dic_stat = json.loads(self.content[self.end_rules + 11:])
+		dic_stat["STATEMENTS"] = set(dic_stat["STATEMENTS"])
+		return dic_stat

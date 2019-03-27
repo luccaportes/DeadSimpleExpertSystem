@@ -1,0 +1,38 @@
+@RULES
+{"RULES":{ 
+	"R1": {
+		"CONDS":[
+            "REDUCAO_ADM",
+            "TENDINITE"
+			],
+		"CONSEQS":[
+			"~TRATAMENTO_A"
+			]
+	},
+	"R2": {
+		"CONDS":[
+			"TENDINITE",
+			"DOR_PENTEAR"
+			],
+		"CONSEQS":[
+			"TRATAMENTO_A"
+			]
+	},
+	"R3": {
+		"CONDS":[
+			"TENDINITE"
+			],
+		"CONSEQS":[
+			"TRATAMENTO_B"
+			]
+		}	
+	}
+}
+
+@STATEMENTS
+{ "STATEMENTS": [
+    "TENDINITE",
+    "DOR_PENTEAR",
+    "REDUCAO_ADM"
+    ]
+}

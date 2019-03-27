@@ -4,7 +4,7 @@
 		"CONDS":[
 			"MALE"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"MR"
 			]
 	},
@@ -13,7 +13,7 @@
 			"FEMALE",
 			"MARRIED"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"MRS",
 			"~MISS"
 			]
@@ -22,17 +22,16 @@
 		"CONDS":[
 			"FEMALE"
 			],
-		"CONSEQ":[
+		"CONSEQS":[
 			"MISS"
 			]
 		}	
-
 	}
 }
 
 @STATEMENTS
 { "STATEMENTS": [
 	"FEMALE",
-	"MARRIED"
+	"~MARRIED"
 	]
 }
